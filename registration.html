@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>registration.html</title>
+</head>
+<body>
+    <h2>Login Here</h2>
+       <div><input type="names"name="two names"placeholder="enter your names"></div>
+           
+        <div><input type="email"name="email"placeholder="enter email here"></div>
+       
+        <div><input type="phone number"name="digits"placeholder="enter your number here"></div>
+        
+        <div><input type="number"name="digits"placeholder="enter your ID or Birth certificate number here"></div>
+        
+        <div><input type="image.png/jpg" alt="image.pdf"name="image"placeholder="submit your  leaving certificate here"></div>
+
+        <div><input type="image.png/jpg" alt="image.pdf"name="image"placeholder="submit your result slip here"></div>
+
+        <div><input type="image.png/jpg" alt="image.pdf"name="image"placeholder="submit your passport photo here"></div>
+                
+        <p><button class="cn"><a href="#">Login</a></button></p>
+      
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Upload</button>
+            </form>
+  
+    <h1>Upload a File</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+    <div id="uploadMessage"></div> <!-- Placeholder for upload status message -->
+
+    <script>
+        // JavaScript to handle the AJAX upload
+        document.getElementById('uploadForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData();
+            const fileInput = document.querySelector('input[name="file"]');
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                // Send the file using AJAX
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.text();
+                document.getElementById('uploadMessage').innerText = result;
+            } catch (error) {
+                document.getElementById('uploadMessage').innerText = 'Upload failed. Please try again.';
+                console.error('Error uploading file:', error);
+            }
+        });
+    </script>
+
+
+       
+          <p><a href="joinus.html">back to home page</a></p>
+</body>
+</html>
